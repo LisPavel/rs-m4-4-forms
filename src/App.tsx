@@ -15,7 +15,13 @@ function App() {
     <div className="App">
       <Signin />
       <Signup />
-      <TextInput label="qwer" value={inputValue} onChange={handleChange} />
+      <TextInput
+        label="qwer"
+        description="ty"
+        placeholder="qwer"
+        value={inputValue}
+        onChange={handleChange}
+      />
     </div>
   );
 }

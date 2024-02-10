@@ -28,6 +28,7 @@ function App() {
         value={inputValue}
         onChange={handleChange}
         error={inputError}
+        withAsterisk={true}
       />
     </div>
   );

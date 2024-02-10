@@ -4,15 +4,27 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   description?: string;
   error?: string | null;
+  withAsterisk?: boolean;
 }
 
-const TextInput = ({ label, description, error, ...rest }: TextInputProps) => {
+const TextInput = ({
+  label,
+  description,
+  error,
+  withAsterisk,
+  ...rest
+}: TextInputProps) => {
   const id = useId();
   const descriptionId = useId();
 
   return (
     <div className="text-input">
-      {label && <label htmlFor={id}>{label}</label>}
+      {label && (
+        <label htmlFor={id}>
+          {label}
+          {withAsterisk && <span className="required">{" * "}</span>}
+        </label>
+      )}
       {description && (
         <div id={descriptionId} className="description">
           {description}

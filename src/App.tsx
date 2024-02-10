@@ -29,6 +29,7 @@ function App() {
         onChange={handleChange}
         error={inputError}
         withAsterisk={true}
+        // variant="unstyled"
         // radius={"xl"}
       />
     </div>

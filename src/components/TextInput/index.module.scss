@@ -2,13 +2,13 @@
 $border-radius: 0.125rem;
 
 $sizes: ("xs", "sm", "md", "lg", "xl");
+$variants: ("filled", "default", "unstyled");
 
 .text-input {
   line-height: 1.55;
 }
 
 .input {
-  outline: none;
   height: 2.25rem;
   -webkit-tap-highlight-color: transparent;
   line-height: calc(2.25rem - 0.125rem);
@@ -20,18 +20,13 @@ $sizes: ("xs", "sm", "md", "lg", "xl");
   box-sizing: border-box;
   font-size: 0.875rem;
   width: 100%;
-  color: #000;
+  color: rgb(0, 0, 0);
   display: block;
   text-align: left;
-  border: 0.0625rem solid #ced4da;
-  background-color: #fff;
-  -webkit-transition: border-color 100ms ease;
-  transition: border-color 100ms ease;
+  outline: none;
   min-height: 2.25rem;
-  padding-left: calc(2.25rem / 3);
-  padding-right: calc(2.25rem / 3);
   padding-block: 1px;
-  border-radius: 0.25rem;
+  padding-inline: 2px;
 
   &:disabled {
     background-color: #f1f3f5;
@@ -39,6 +34,9 @@ $sizes: ("xs", "sm", "md", "lg", "xl");
     opacity: 0.6;
     cursor: not-allowed;
     pointer-events: none;
+  }
+  &:focus {
+    border-color: #228be6;
   }
 
   &[data-invalid] {
@@ -90,6 +88,37 @@ $sizes: ("xs", "sm", "md", "lg", "xl");
   font-size: calc(0.875rem - 0.125rem);
   line-height: 1.2;
   display: block;
+}
+
+@mixin variant($name) {
+  .variant-#{$name} {
+    @content;
+  }
+}
+
+@include variant("default") {
+  border: 0.0625rem solid #ced4da;
+  background-color: #fff;
+  -webkit-transition: border-color 100ms ease;
+  transition: border-color 100ms ease;
+  padding-left: calc(2.25rem / 3);
+  padding-right: calc(2.25rem / 3);
+}
+
+@include variant("filled") {
+  border: 0.0625rem solid transparent;
+  background-color: rgb(241, 243, 245);
+  padding-left: calc(0.75rem);
+  padding-right: calc(0.75rem);
+}
+
+@include variant("unstyled") {
+  border-width: 0px;
+  background-color: transparent;
+  min-height: 1.75rem;
+  &:focus {
+    border-color: transparent;
+  }
 }
 
 @each $size in $sizes {

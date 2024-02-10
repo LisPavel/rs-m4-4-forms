@@ -2,6 +2,7 @@ import React, { InputHTMLAttributes, useId } from "react";
 import styles from "./index.module.scss";
 
 type Sizes = "xs" | "sm" | "md" | "lg" | "xl";
+type Variants = "filled" | "default" | "unstyled";
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -9,6 +10,7 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string | null;
   withAsterisk?: boolean;
   radius?: Sizes;
+  variant?: Variants;
 }
 
 const TextInput = ({
@@ -17,12 +19,22 @@ const TextInput = ({
   error,
   withAsterisk,
   radius = "sm",
+  variant = "default",
   ...rest
 }: TextInputProps) => {
   const id = useId();
   const descriptionId = useId();
 
   const radiusClass: keyof typeof styles = `radius-${radius}`;
+  const variantClass: keyof typeof styles = `variant-${variant}`;
+
+  const inputClasses = [
+    styles.input,
+    styles[variantClass],
+    variant !== "unstyled" && styles[radiusClass],
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <div className={styles["text-input"]}>
@@ -40,7 +52,7 @@ const TextInput = ({
       <div className={styles["input-wrapper"]}>
         <input
           {...rest}
-          className={styles.input + " " + styles[radiusClass]}
+          className={inputClasses}
           type="text"
           id={id}
           aria-describedby={description ? descriptionId : undefined}

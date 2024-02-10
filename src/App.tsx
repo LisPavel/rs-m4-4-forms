@@ -5,8 +5,14 @@ import TextInput from "./components/TextInput";
 
 function App() {
   const [inputValue, setInputValue] = useState("");
+  const [inputError, setInputError] = useState<string | null>(null);
   const handleChange: ChangeEventHandler<HTMLInputElement> = (ev) => {
     setInputValue(ev.target.value);
+    if (ev.target.value.length > 6) {
+      setInputError("some error");
+    } else {
+      setInputError(null);
+    }
   };
   useEffect(() => {
     console.log(inputValue);
@@ -21,6 +27,7 @@ function App() {
         placeholder="qwer"
         value={inputValue}
         onChange={handleChange}
+        error={inputError}
       />
     </div>
   );

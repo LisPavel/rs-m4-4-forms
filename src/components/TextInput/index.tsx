@@ -1,4 +1,5 @@
 import React, { InputHTMLAttributes, useId } from "react";
+import styles from "./index.module.scss";
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -18,21 +19,22 @@ const TextInput = ({
   const descriptionId = useId();
 
   return (
-    <div className="text-input">
+    <div className={styles["text-input"]}>
       {label && (
-        <label htmlFor={id}>
+        <label htmlFor={id} className={styles.label}>
           {label}
-          {withAsterisk && <span className="required">{" * "}</span>}
+          {withAsterisk && <span className={styles.requred}>{" * "}</span>}
         </label>
       )}
       {description && (
-        <div id={descriptionId} className="description">
+        <div id={descriptionId} className={styles.description}>
           {description}
         </div>
       )}
-      <div className="input-wrapper">
+      <div className={styles["input-wrapper"]}>
         <input
           {...rest}
+          className={styles.input}
           type="text"
           id={id}
           aria-describedby={description ? descriptionId : undefined}
@@ -40,7 +42,7 @@ const TextInput = ({
           data-invalid={error ? true : undefined}
         />
       </div>
-      {error && <div className="error">{error}</div>}
+      {error && <div className={styles.error}>{error}</div>}
     </div>
   );
 };

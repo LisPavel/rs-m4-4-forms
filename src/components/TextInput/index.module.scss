@@ -1,6 +1,12 @@
+@use "sass:math";
+$border-radius: 0.125rem;
+
+$sizes: ("xs", "sm", "md", "lg", "xl");
+
 .text-input {
   line-height: 1.55;
 }
+
 .input {
   outline: none;
   height: 2.25rem;
@@ -84,4 +90,11 @@
   font-size: calc(0.875rem - 0.125rem);
   line-height: 1.2;
   display: block;
+}
+
+@each $size in $sizes {
+  $i: index($sizes, $size);
+  .radius-#{$size} {
+    border-radius: $border-radius * math.pow(2, ($i - 1));
+  }
 }

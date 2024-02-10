@@ -30,14 +30,16 @@ const TextInput = ({
           {description}
         </div>
       )}
-      <input
-        {...rest}
-        type="text"
-        id={id}
-        aria-describedby={description ? descriptionId : undefined}
-        aria-invalid={error ? true : undefined}
-        data-invalid={error ? true : undefined}
-      />
+      <div className="input-wrapper">
+        <input
+          {...rest}
+          type="text"
+          id={id}
+          aria-describedby={description ? descriptionId : undefined}
+          aria-invalid={error ? true : undefined}
+          data-invalid={error ? true : undefined}
+        />
+      </div>
       {error && <div className="error">{error}</div>}
     </div>
   );

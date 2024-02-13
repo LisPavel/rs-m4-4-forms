@@ -10,15 +10,15 @@ function App() {
   const [size, setSize] = useState<Sizes>("sm");
   const [variant, setVariant] = useState<Variants>("default");
   const [inputValue, setInputValue] = useState("");
-  const [inputError, setInputError] = useState<string | null>(null);
+  // const [inputError, setInputError] = useState<string | null>(null);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (ev) => {
     setInputValue(ev.target.value);
-    if (ev.target.value.length > 6) {
-      setInputError("some error");
-    } else {
-      setInputError(null);
-    }
+    // if (ev.target.value.length > 6) {
+    //   setInputError("some error");
+    // } else {
+    //   setInputError(null);
+    // }
   };
 
   const handleSizeSelect: ChangeEventHandler<HTMLSelectElement> = (ev) => {
@@ -37,10 +37,10 @@ function App() {
         placeholder="qwer"
         value={inputValue}
         onChange={handleChange}
-        error={inputError}
         withAsterisk={true}
         size={size}
         variant={variant}
+        error
         // variant="unstyled"
         // radius={"xl"}
       />

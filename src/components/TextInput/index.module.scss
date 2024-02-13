@@ -62,6 +62,9 @@ $variants: ("filled", "default", "unstyled");
   &[data-invalid] {
     color: #fa5252;
     border-color: #fa5252;
+    &::placeholder {
+      color: #fa5252;
+    }
   }
 }
 

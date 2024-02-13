@@ -8,7 +8,7 @@ interface TextInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   label?: string;
   description?: string;
-  error?: string | null;
+  error?: string | boolean | null;
   withAsterisk?: boolean;
   radius?: Sizes;
   size?: Sizes;
@@ -41,6 +41,7 @@ const TextInput = ({
     .filter(Boolean)
     .join(" ");
 
+  console.log(error);
   return (
     <div className={styles["text-input"]}>
       {label && (

@@ -10,6 +10,7 @@ function App() {
   const [size, setSize] = useState<Sizes>("sm");
   const [variant, setVariant] = useState<Variants>("default");
   const [inputValue, setInputValue] = useState("");
+  const [disabled, setDisabled] = useState(false);
   // const [inputError, setInputError] = useState<string | null>(null);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (ev) => {
@@ -27,6 +28,9 @@ function App() {
   const handleVariantSelect: ChangeEventHandler<HTMLSelectElement> = (ev) => {
     setVariant(ev.target.value as Variants);
   };
+  const handleDisabledChange: ChangeEventHandler<HTMLInputElement> = (ev) => {
+    setDisabled(ev.target.checked);
+  };
   return (
     <div className="App">
       <Signin />
@@ -41,6 +45,7 @@ function App() {
         size={size}
         variant={variant}
         error
+        disabled={disabled}
         // variant="unstyled"
         // radius={"xl"}
       />
@@ -59,6 +64,14 @@ function App() {
           <option key={variant}>{variant}</option>
         ))}
       </select>
+      <label>
+        disabled{" "}
+        <input
+          checked={disabled}
+          onChange={handleDisabledChange}
+          type="checkbox"
+        />
+      </label>
     </div>
   );
 }

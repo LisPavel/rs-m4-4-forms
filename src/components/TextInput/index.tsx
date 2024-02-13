@@ -1,15 +1,17 @@
 import React, { InputHTMLAttributes, useId } from "react";
 import styles from "./index.module.scss";
 
-type Sizes = "xs" | "sm" | "md" | "lg" | "xl";
-type Variants = "filled" | "default" | "unstyled";
+export type Sizes = "xs" | "sm" | "md" | "lg" | "xl";
+export type Variants = "filled" | "default" | "unstyled";
 
-interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface TextInputProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   label?: string;
   description?: string;
   error?: string | null;
   withAsterisk?: boolean;
   radius?: Sizes;
+  size?: Sizes;
   variant?: Variants;
 }
 
@@ -20,18 +22,21 @@ const TextInput = ({
   withAsterisk,
   radius = "sm",
   variant = "default",
+  size = "sm",
   ...rest
 }: TextInputProps) => {
   const id = useId();
   const descriptionId = useId();
 
-  const radiusClass: keyof typeof styles = `radius-${radius}`;
-  const variantClass: keyof typeof styles = `variant-${variant}`;
+  const radiusClassKey: keyof typeof styles = `radius-${radius}`;
+  const variantClassKey: keyof typeof styles = `variant-${variant}`;
+  const sizeClassKey: keyof typeof styles = `size-${size}`;
 
   const inputClasses = [
     styles.input,
-    styles[variantClass],
-    variant !== "unstyled" && styles[radiusClass],
+    styles[variantClassKey],
+    styles[sizeClassKey],
+    variant !== "unstyled" && styles[radiusClassKey],
   ]
     .filter(Boolean)
     .join(" ");
@@ -39,13 +44,19 @@ const TextInput = ({
   return (
     <div className={styles["text-input"]}>
       {label && (
-        <label htmlFor={id} className={styles.label}>
+        <label
+          htmlFor={id}
+          className={[styles.label, styles[sizeClassKey]].join(" ")}
+        >
           {label}
           {withAsterisk && <span className={styles.requred}>{" * "}</span>}
         </label>
       )}
       {description && (
-        <div id={descriptionId} className={styles.description}>
+        <div
+          id={descriptionId}
+          className={[styles.description, styles[sizeClassKey]].join(" ")}
+        >
           {description}
         </div>
       )}
@@ -60,7 +71,11 @@ const TextInput = ({
           data-invalid={error ? true : undefined}
         />
       </div>
-      {error && <div className={styles.error}>{error}</div>}
+      {error && (
+        <div className={[styles.error, styles[sizeClassKey]].join(" ")}>
+          {error}
+        </div>
+      )}
     </div>
   );
 };

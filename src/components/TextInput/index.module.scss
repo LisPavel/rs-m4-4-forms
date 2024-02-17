@@ -92,6 +92,23 @@ $variants: ("filled", "default", "unstyled");
   color: #fa5252;
 }
 
+.input-icon {
+  display: block;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #adb5bd;
+  @include allSizes() using ($i, $sizeName, $size) {
+    width: $size;
+  }
+}
+
 .description {
   -webkit-tap-highlight-color: transparent;
   text-decoration: none;
@@ -130,6 +147,11 @@ $variants: ("filled", "default", "unstyled");
     min-height: $height;
     padding-left: calc($height / 3);
     padding-right: calc($height / 3);
+  }
+  &[data-with-icon] {
+    @include allSizes() using ($i, $size, $height) {
+      padding-left: $height;
+    }
   }
 }
 

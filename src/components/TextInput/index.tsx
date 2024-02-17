@@ -1,4 +1,5 @@
-import React, { InputHTMLAttributes, useId } from "react";
+import React, { InputHTMLAttributes, ReactElement, useId } from "react";
+import { merge } from "../../utils";
 import styles from "./index.module.scss";
 
 export type Sizes = "xs" | "sm" | "md" | "lg" | "xl";
@@ -13,6 +14,7 @@ interface TextInputProps
   radius?: Sizes;
   size?: Sizes;
   variant?: Variants;
+  icon?: ReactElement;
 }
 
 const TextInput = ({
@@ -23,6 +25,7 @@ const TextInput = ({
   radius = "sm",
   variant = "default",
   size = "sm",
+  icon,
   ...rest
 }: TextInputProps) => {
   const id = useId();
@@ -62,6 +65,11 @@ const TextInput = ({
         </div>
       )}
       <div className={styles["input-wrapper"]}>
+        {icon && (
+          <div className={merge(styles["input-icon"], styles[sizeClassKey])}>
+            {icon}
+          </div>
+        )}
         <input
           {...rest}
           className={inputClasses}
@@ -70,6 +78,7 @@ const TextInput = ({
           aria-describedby={description ? descriptionId : undefined}
           aria-invalid={error ? true : undefined}
           data-invalid={error ? true : undefined}
+          data-with-icon={icon ? true : undefined}
         />
       </div>
       {error && (

@@ -1,3 +1,4 @@
+import { IconAt } from "@tabler/icons-react";
 import React, { ChangeEvent, FormEventHandler, useRef } from "react";
 import TextInput from "../TextInput";
 
@@ -32,7 +33,7 @@ const Signup = () => {
     >
       <h3>Signup</h3>
       <TextInput name="name" label="Имя" />
-      <TextInput name="nickname" label="Ник" />
+      <TextInput name="nickname" label="Ник" icon={<IconAt size="0.8rem" />} />
       <TextInput name="email" label="Почта" />
       <TextInput name="gender" label="Пол" />
       <TextInput name="password" type="password" label="Пароль" />

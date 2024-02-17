@@ -36,7 +36,19 @@ const Signup = () => {
       <TextInput name="name" label="Имя" />
       <TextInput name="nickname" label="Ник" icon={<IconAt size="0.8rem" />} />
       <TextInput name="email" label="Почта" />
-      <TextInput name="gender" label="Пол" />
+      <div style={{ display: "grid" }}>
+        <div className="label">Пол</div>
+        <div style={{ display: "flex" }}>
+          <label>
+            <input type="radio" name="gender" value="male" />
+            {" мужской"}
+          </label>
+          <label>
+            <input type="radio" name="gender" value="female" />
+            {" женский"}
+          </label>
+        </div>
+      </div>
       <PasswordInput name="password" type="password" label="Пароль" />
       <PasswordInput
         name="passwordRepeat"

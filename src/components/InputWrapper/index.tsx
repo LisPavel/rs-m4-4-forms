@@ -15,6 +15,7 @@ export interface InputWrapperProps {
   variant?: Variants;
   icon?: ReactElement;
   InputComponent: (props: InputProps) => ReactElement;
+  className?: string;
 }
 export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size">,
@@ -32,6 +33,7 @@ const InputWrapper = ({
   size = "sm",
   icon,
   InputComponent,
+  className,
   ...rest
 }: InputWrapperProps) => {
   const id = useId();
@@ -46,30 +48,53 @@ const InputWrapper = ({
     styles[variantClassKey],
     styles[sizeClassKey],
     variant !== "unstyled" && styles[radiusClassKey],
+    "input",
+    variantClassKey,
+    sizeClassKey,
+    variant !== "unstyled" && radiusClassKey,
   );
 
   return (
-    <div className={styles["custom-input"]}>
+    <div className={merge(styles["custom-input"], "custom-input", className)}>
       {label && (
         <label
           htmlFor={id}
-          className={[styles.label, styles[sizeClassKey]].join(" ")}
+          className={merge(
+            styles.label,
+            styles[sizeClassKey],
+            "label",
+            sizeClassKey,
+          )}
         >
           {label}
-          {withAsterisk && <span className={styles.requred}>{" * "}</span>}
+          {withAsterisk && (
+            <span className={merge(styles.requred, "required")}>{" * "}</span>
+          )}
         </label>
       )}
       {description && (
         <div
           id={descriptionId}
-          className={[styles.description, styles[sizeClassKey]].join(" ")}
+          className={merge(
+            styles.description,
+            styles[sizeClassKey],
+            "description",
+            sizeClassKey,
+          )}
         >
           {description}
         </div>
       )}
-      <div className={styles["input-wrapper"]}>
+      <div className={merge(styles["input-wrapper"], "input-wrapper")}>
         {icon && (
-          <div className={merge(styles["input-icon"], styles[sizeClassKey])}>
+          <div
+            className={merge(
+              styles["input-icon"],
+              styles[sizeClassKey],
+              "input-icon",
+              sizeClassKey,
+            )}
+          >
             {icon}
           </div>
         )}
@@ -84,7 +109,14 @@ const InputWrapper = ({
         />
       </div>
       {error && (
-        <div className={[styles.error, styles[sizeClassKey]].join(" ")}>
+        <div
+          className={merge(
+            styles.error,
+            styles[sizeClassKey],
+            error,
+            sizeClassKey,
+          )}
+        >
           {error}
         </div>
       )}

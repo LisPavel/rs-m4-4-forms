@@ -1,0 +1,44 @@
+@import "../InputWrapper/index.scss";
+
+.password-input {
+  .input {
+    // background-color: red;
+    @include allSizes() using ($i, $size, $height) {
+      padding-right: $height !important;
+    }
+  }
+  .reveal-button {
+    cursor: pointer;
+    appearance: none;
+    font-size: 1rem;
+    text-align: left;
+    text-decoration: none;
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 0.25rem;
+    padding: 0px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.625rem;
+    min-height: 1.625rem;
+    width: 1.625rem;
+    min-width: 1.625rem;
+    border: 0.0625rem solid transparent;
+    background-color: transparent;
+    color: rgb(134, 142, 150);
+  }
+  .right-section {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include allSizes() using ($i, $size, $height) {
+      width: $height;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { IconAt } from "@tabler/icons-react";
 import React, { ChangeEvent, FormEventHandler, useRef } from "react";
+import PasswordInput from "../PasswordInput";
 import TextInput from "../TextInput";
 
 import styles from "./index.module.scss";
@@ -36,8 +37,8 @@ const Signup = () => {
       <TextInput name="nickname" label="Ник" icon={<IconAt size="0.8rem" />} />
       <TextInput name="email" label="Почта" />
       <TextInput name="gender" label="Пол" />
-      <TextInput name="password" type="password" label="Пароль" />
-      <TextInput
+      <PasswordInput name="password" type="password" label="Пароль" />
+      <PasswordInput
         name="passwordRepeat"
         type="password"
         label="Повторить пароль"

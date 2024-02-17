@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FormEventHandler, useRef } from "react";
+import PasswordInput from "../PasswordInput";
 import TextInput from "../TextInput";
 import styles from "./index.module.scss";
 
@@ -27,7 +28,7 @@ const Signin = () => {
     >
       <h3>Signin form</h3>
       <TextInput name="email" label="Email" />
-      <TextInput name="password" type="password" label="Password" />
+      <PasswordInput name="password" type="password" label="Password" />
       <button type="submit">Войти</button>
     </form>
   );

@@ -1,6 +1,6 @@
 import React, { InputHTMLAttributes, ReactElement, useId } from "react";
 import { merge } from "../../utils";
-import styles from "./index.module.scss";
+import "./index.scss";
 
 export type Sizes = "xs" | "sm" | "md" | "lg" | "xl";
 export type Variants = "filled" | "default" | "unstyled";
@@ -21,6 +21,7 @@ export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size">,
     Omit<InputWrapperProps, "InputComponent"> {
   descriptionId: string;
+  sizeClass?: string;
 }
 
 const InputWrapper = ({
@@ -39,65 +40,32 @@ const InputWrapper = ({
   const id = useId();
   const descriptionId = useId();
 
-  const radiusClassKey: keyof typeof styles = `radius-${radius}`;
-  const variantClassKey: keyof typeof styles = `variant-${variant}`;
-  const sizeClassKey: keyof typeof styles = `size-${size}`;
+  const radiusClass = `radius-${radius}`;
+  const variantClass = `variant-${variant}`;
+  const sizeClass = `size-${size}`;
 
   const inputClasses = merge(
-    styles.input,
-    styles[variantClassKey],
-    styles[sizeClassKey],
-    variant !== "unstyled" && styles[radiusClassKey],
     "input",
-    variantClassKey,
-    sizeClassKey,
-    variant !== "unstyled" && radiusClassKey,
+    variantClass,
+    sizeClass,
+    variant !== "unstyled" && radiusClass,
   );
 
   return (
-    <div className={merge(styles["custom-input"], "custom-input", className)}>
+    <div className={merge("custom-input", className)}>
       {label && (
-        <label
-          htmlFor={id}
-          className={merge(
-            styles.label,
-            styles[sizeClassKey],
-            "label",
-            sizeClassKey,
-          )}
-        >
+        <label htmlFor={id} className={merge("label", sizeClass)}>
           {label}
-          {withAsterisk && (
-            <span className={merge(styles.requred, "required")}>{" * "}</span>
-          )}
+          {withAsterisk && <span className={merge("required")}>{" * "}</span>}
         </label>
       )}
       {description && (
-        <div
-          id={descriptionId}
-          className={merge(
-            styles.description,
-            styles[sizeClassKey],
-            "description",
-            sizeClassKey,
-          )}
-        >
+        <div id={descriptionId} className={merge("description", sizeClass)}>
           {description}
         </div>
       )}
-      <div className={merge(styles["input-wrapper"], "input-wrapper")}>
-        {icon && (
-          <div
-            className={merge(
-              styles["input-icon"],
-              styles[sizeClassKey],
-              "input-icon",
-              sizeClassKey,
-            )}
-          >
-            {icon}
-          </div>
-        )}
+      <div className={merge("input-wrapper")}>
+        {icon && <div className={merge("input-icon", sizeClass)}>{icon}</div>}
         <InputComponent
           {...rest}
           className={inputClasses}
@@ -106,20 +74,10 @@ const InputWrapper = ({
           descriptionId={descriptionId}
           error={error}
           icon={icon}
+          sizeClass={sizeClass}
         />
       </div>
-      {error && (
-        <div
-          className={merge(
-            styles.error,
-            styles[sizeClassKey],
-            error,
-            sizeClassKey,
-          )}
-        >
-          {error}
-        </div>
-      )}
+      {error && <div className={merge(error, sizeClass)}>{error}</div>}
     </div>
   );
 };
